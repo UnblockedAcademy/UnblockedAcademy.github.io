@@ -3,148 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Playground</title>
+    <title>Game Launcher</title>
     <style>
         body {
             margin: 0;
-            padding: 0;
+            padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
             min-height: 100vh;
             background-color: #f0f0f0;
             font-family: Arial, sans-serif;
         }
-        
-        #gameCanvas {
-            border: 2px solid #333;
-            background-color: #fff;
+
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
         }
-        
-        #gameControls {
-            margin-top: 20px;
-            text-align: center;
+
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
         }
-        
-        button {
-            padding: 10px 20px;
-            margin: 5px;
-            font-size: 16px;
+
+        .game-button {
+            padding: 15px 30px;
+            font-size: 18px;
             cursor: pointer;
             background-color: #4CAF50;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
+            transition: transform 0.2s, background-color 0.2s;
         }
-        
-        button:hover {
+
+        .game-button:hover {
             background-color: #45a049;
+            transform: scale(1.05);
+        }
+
+        .game-button:active {
+            transform: scale(0.95);
+        }
+
+        #gameFrame {
+            margin-top: 20px;
+            width: 800px;
+            height: 600px;
+            border: 2px solid #333;
+            display: none;
         }
     </style>
 </head>
 <body>
-    <canvas id="gameCanvas" width="800" height="600"></canvas>
-    <div id="gameControls">
-        <button onclick="startGame()">Start Game</button>
-        <button onclick="pauseGame()">Pause</button>
-        <button onclick="resetGame()">Reset</button>
+    <h1>Game Launcher</h1>
+    <div class="button-container">
+        <button class="game-button" onclick="loadGame('eaglercraft1.12.2.html')">Eaglercraft 1.12.2</button>
+        <button class="game-button" onclick="loadGame('pong.html')">Pong</button>
+        <button class="game-button" onclick="loadGame('tetris.html')">Tetris</button>
+        <button class="game-button" onclick="closeGame()">Close Game</button>
     </div>
+    <iframe id="gameFrame"></iframe>
 
     <script>
-        // Get canvas and context
-        const canvas = document.getElementById('gameCanvas');
-        const ctx = canvas.getContext('2d');
-        
-        // Game state variables
-        let isPlaying = false;
-        let animationFrameId;
+        const gameFrame = document.getElementById('gameFrame');
 
-        // Basic game object (example: a moving square)
-        let player = {
-            x: 50,
-            y: 50,
-            width: 40,
-            height: 40,
-            speed: 5,
-            color: '#FF0000'
-        };
-
-        // Game loop
-        function gameLoop() {
-            if (!isPlaying) return;
-
-            // Clear canvas
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            // Update game state
-            update();
-            
-            // Draw game objects
-            draw();
-            
-            // Request next frame
-            animationFrameId = requestAnimationFrame(gameLoop);
+        function loadGame(gameUrl) {
+            gameFrame.src = gameUrl;
+            gameFrame.style.display = 'block';
         }
 
-        // Update game logic
-        function update() {
-            // Example movement (move right)
-            player.x += player.speed;
-            if (player.x > canvas.width) player.x = -player.width;
+        function closeGame() {
+            gameFrame.style.display = 'none';
+            gameFrame.src = '';
         }
-
-        // Draw game objects
-        function draw() {
-            // Draw player
-            ctx.fillStyle = player.color;
-            ctx.fillRect(player.x, player.y, player.width, player.height);
-        }
-
-        // Control functions
-        function startGame() {
-            if (!isPlaying) {
-                isPlaying = true;
-                gameLoop();
-            }
-        }
-
-        function pauseGame() {
-            isPlaying = false;
-            cancelAnimationFrame(animationFrameId);
-        }
-
-        function resetGame() {
-            pauseGame();
-            player.x = 50;
-            player.y = 50;
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            draw();
-        }
-
-        // Basic keyboard controls
-        document.addEventListener('keydown', (event) => {
-            switch(event.key) {
-                case 'ArrowUp':
-                    player.y -= player.speed;
-                    break;
-                case 'ArrowDown':
-                    player.y += player.speed;
-                    break;
-                case 'ArrowLeft':
-                    player.x -= player.speed;
-                    break;
-                case 'ArrowRight':
-                    player.x += player.speed;
-                    break;
-            }
-            // Keep player within bounds
-            player.x = Math.max(0, Math.min(canvas.width - player.width, player.x));
-            player.y = Math.max(0, Math.min(canvas.height - player.height, player.y));
-        });
-
-        // Initial draw
-        draw();
     </script>
 </body>
 </html>

@@ -1,2 +1,0 @@
-# UnblockedAcademy.github.io
-hello!

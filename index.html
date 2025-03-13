@@ -5,39 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🤫</title>
     <link rel="icon" type="image/png" href="icon.png">
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-            font-family: Arial, sans-serif;
-            background-color: purple;
-        }
-        h1 {
-            color: white; /* Sets the title text to white */
-        }
-        button {
-            margin: 10px;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            background-color: black;
-            color: white;
-            border: none;
-        }
-        button:hover {
-            background-color: #333;
-        }
-    </style>
+    <link rel="stylesheet" href="stylesheet.css">
 </head>
 <body>
-    <h1>"Games"</h1>
+    <header>
+        <h1>Games</h1>
+    </header>
     
-    <button onclick="window.location.href='eaglercraft.html'">eaglercraft 1.8.8</button>
-    <button onclick="window.location.href='/games/slope.html'">slope</button>
-    <button onclick="window.location.href='/games/moto-x3m.html'">Moto-X3m</button>
-    <button onclick="window.location.href='d.html'">D</button>
-
+    <div class="button-container">
+        <button class="tile-d" onclick="window.location.href='d.html'">Placeholder</button>
+        <button class="tile-eaglercraft" onclick="window.location.href='eaglercraft.html'">Eaglercraft 1.8.8</button>
+        <button class="tile-moto" onclick="window.location.href='/games/moto-x3m.html'">Moto-X3M</button>
+        <button class="tile-slope" onclick="window.location.href='/games/slope.html'">Slope</button>
+        <button class="tile-1" onclick="window.location.href='Placeholder.html'">Placeholder</button>
+        <button class="tile-2" onclick="window.location.href='Placeholder.html'">Placeholder</button>
+        <button class="tile-3" onclick="window.location.href='Placeholder.html'">Placeholder</button>
+        <button class="tile-4" onclick="window.location.href='Placeholder.html'">Placeholder</button>
+    </div>
+    <p class="note">Note: not all these games work.</p>
+    <p class="suggestion">Ask me for game suggestions</p>
 </body>
 </html>
